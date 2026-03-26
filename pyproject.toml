@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lam-pinn"
+version = "0.1.0"
+description = "Clean public release of the LAM-PINN training and adaptation pipeline"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+  { name = "Beomcheol Park" }
+]
+dependencies = [
+  "torch>=2.0",
+  "numpy>=1.24",
+  "pandas>=2.0",
+  "scipy>=1.10",
+  "matplotlib>=3.7",
+  "PyYAML>=6.0"
+]
+
+[tool.setuptools.packages.find]
+include = ["lam_pinn*"]

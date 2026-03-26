@@ -1,0 +1,35 @@
+seed: 42
+preferred_cuda_index: 0
+output_root: outputs/train
+run_name: lam_pinn_train
+train_csv_path: data/train/task_metadata.csv
+expected_num_clusters: 3
+reference_row_index: 13
+
+model:
+  hidden_dim: 64
+  dropout_p: 0.2
+  gate_init: 0.5
+
+physics:
+  nu: 0.3
+  a: 10.0
+  b: 10.0
+  h: 1.0
+
+sampling:
+  domain_range:
+    - [0.0, 10.0]
+    - [0.0, 10.0]
+  num_domain_points: 10000
+  num_bc_points: 500
+
+optimization:
+  forward_stage_epochs: 200
+  backward_stage_epochs: 100
+  lr_model: 0.002
+  bc_scale: 50.0
+  scheduler_factor: 0.7
+  scheduler_patience: 150
+  backward_scheduler_factor: 0.7
+  backward_scheduler_patience: 50
