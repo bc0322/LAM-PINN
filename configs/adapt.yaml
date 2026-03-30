@@ -20,7 +20,7 @@ sampling:
     - [0.0, 10.0]
     - [0.0, 10.0]
   num_domain_points: 10000
-  num_bc_points: 500
+  num_bc_points: 1250
 
 task:
   case_index: 1
