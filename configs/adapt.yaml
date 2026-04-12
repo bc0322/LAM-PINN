@@ -16,7 +16,7 @@ sampling:
 task:
   case_index: 1
   eval_dir: data/eval
-  eval_filename_pattern: case{idx}.csv
+  eval_filename_pattern: sample_task{idx}.csv
 
 optimization:
   epochs: 1000
