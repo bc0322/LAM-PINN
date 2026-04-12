@@ -28,16 +28,16 @@ from lam_pinn.utils.seed import set_seed
 
 
 _CASE_LIBRARY = {
-    1: {"E": 200.0, "f": 100.0, "k": 100.0},
-    2: {"E": 200.0, "f": 100.0, "k": 300.0},
-    3: {"E": 200.0, "f": 300.0, "k": 100.0},
-    4: {"E": 200.0, "f": 300.0, "k": 300.0},
-    5: {"E": 300.0, "f": 100.0, "k": 100.0},
-    6: {"E": 300.0, "f": 100.0, "k": 300.0},
-    7: {"E": 300.0, "f": 300.0, "k": 100.0},
-    8: {"E": 300.0, "f": 300.0, "k": 300.0},
-    9: {"E": 400.0, "f": 100.0, "k": 100.0},
-    10: {"E": 400.0, "f": 100.0, "k": 300.0},
+    1: {"E": 55.0, "f": 1.80, "k": 9.20},
+    2: {"E": 60.0, "f": 1.90, "k": 9.00},
+    3: {"E": 134.0, "f": 1.954, "k": 0.772},
+    4: {"E": 55.0, "f": 1.70, "k": 9.80},
+    5: {"E": 79.0, "f": 0.84, "k": 2.302},
+    6: {"E": 82.0, "f": 1.847, "k": 6.759},
+    7: {"E": 79.0, "f": 1.00, "k": 2.10},
+    8: {"E": 80.0, "f": 1.91, "k": 7.00},
+    9: {"E": 51.0, "f": 1.90, "k": 9.50},
+    10: {"E": 79.0, "f": 1.00, "k": 2.40},
 }
 
 
@@ -45,18 +45,29 @@ def _resolve_task_spec(task_config) -> dict:
     case_index = int(task_config.case_index)
     if case_index not in _CASE_LIBRARY:
         raise ValueError(
-            f"Unsupported case_index={case_index}. Supported cases: {sorted(_CASE_LIBRARY.keys())}"
+            f"Unsupported case_index={case_index}. "
+            f"Available cases: {sorted(_CASE_LIBRARY.keys())}"
         )
 
-    task_params = dict(_CASE_LIBRARY[case_index])
-    eval_dir = Path(task_config.eval_dir)
-    gt_csv_path = eval_dir / task_config.eval_filename_pattern.format(idx=case_index)
+    csv_path = Path(task_config.eval_dir) / task_config.eval_filename_pattern.format(idx=case_index)
+
+    # legacy fallback for the current zip archive
+    if not csv_path.exists() and case_index == 1:
+        legacy_path = Path(task_config.eval_dir) / "sample_task.csv"
+        if legacy_path.exists():
+            csv_path = legacy_path
+
+    if not csv_path.exists():
+        raise FileNotFoundError(f"Evaluation CSV not found for case {case_index}: {csv_path}")
+
+    case_params = _CASE_LIBRARY[case_index]
     return {
+        "name": f"case_{case_index:02d}",
         "case_index": case_index,
-        "E": float(task_params["E"]),
-        "f": float(task_params["f"]),
-        "k": float(task_params["k"]),
-        "gt_csv_path": str(gt_csv_path),
+        "E": float(case_params["E"]),
+        "f": float(case_params["f"]),
+        "k": float(case_params["k"]),
+        "gt_csv_path": str(csv_path),
     }
 
 
