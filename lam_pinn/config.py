@@ -34,6 +34,8 @@ class TrainOptimizationConfig:
     forward_stage_epochs: int = 200
     backward_stage_epochs: int = 100
     lr_model: float = 0.002
+    forward_gate_lr: float = 5e-3
+    backward_lr: float = 5e-5
     bc_scale: float = 50.0
     scheduler_factor: float = 0.7
     scheduler_patience: int = 150
@@ -45,6 +47,7 @@ class TrainOptimizationConfig:
 class AdaptOptimizationConfig:
     epochs: int = 1000
     lr_model: float = 0.003
+    lr_gate: float = 3e-1
     bc_scale: float = 50.0
     scheduler_factor: float = 0.7
     scheduler_patience: int = 150
@@ -77,9 +80,10 @@ class TrainConfig:
     preferred_cuda_index: int = 0
     output_root: str = "outputs/train"
     run_name: str = "lam_pinn_train"
-    train_csv_path: str = "data/train/tasks_train.csv"
+    train_csv_path: str = "data/train/task_metadata.csv"
     expected_num_clusters: int | None = None
     reference_row_index: int = 13
+    warm_start_checkpoint_path: str | None = None
     model: ModelConfig = field(default_factory=ModelConfig)
     physics: PhysicsConfig = field(default_factory=PhysicsConfig)
     sampling: SamplingConfig = field(default_factory=SamplingConfig)
@@ -116,9 +120,10 @@ def load_train_config(path: str | Path) -> TrainConfig:
         preferred_cuda_index=data.get("preferred_cuda_index", 0),
         output_root=data.get("output_root", "outputs/train"),
         run_name=data.get("run_name", "lam_pinn_train"),
-        train_csv_path=data.get("train_csv_path", "data/train/tasks_train.csv"),
+        train_csv_path=data.get("train_csv_path", "data/train/task_metadata.csv"),
         expected_num_clusters=data.get("expected_num_clusters"),
         reference_row_index=data.get("reference_row_index", 13),
+        warm_start_checkpoint_path=data.get("warm_start_checkpoint_path"),
         model=ModelConfig(**data.get("model", {})),
         physics=PhysicsConfig(**data.get("physics", {})),
         sampling=SamplingConfig(**data.get("sampling", {})),
