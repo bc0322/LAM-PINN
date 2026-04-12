@@ -1,42 +1,29 @@
-seed: 42
-preferred_cuda_index: 0
-checkpoint_path: outputs/train/lam_pinn_train/checkpoints/model.pt
+seed: 20
+preferred_cuda_index: 1
+run_name: lam_pinn_adapt_single_case
+checkpoint_path: outputs/train/solid_3cluster_adam/checkpoints
 output_root: outputs/adapt
-run_name: lam_pinn_adapt_demo
 
 model:
   hidden_dim: 64
   dropout_p: 0.0
   gate_init: 0.5
 
-physics:
-  nu: 0.3
-  a: 10.0
-  b: 10.0
-  h: 1.0
-
 sampling:
-  domain_range:
-    - [0.0, 10.0]
-    - [0.0, 10.0]
   num_domain_points: 10000
-  num_bc_points: 1250
+  num_bc_points: 500
 
 task:
   case_index: 1
   eval_dir: data/eval
-  eval_filename_pattern: sample_task{idx}.csv
+  eval_filename_pattern: case{idx}.csv
 
 optimization:
   epochs: 1000
   lr_model: 0.003
+  lr_gate: 0.3
   bc_scale: 50.0
   scheduler_factor: 0.7
   scheduler_patience: 150
   freeze_basis: true
-  print_every: 100
-
-visualization:
-  grid_size: 100
-  levels: 20
-  deformation_error_max:
+  print_every: 200
