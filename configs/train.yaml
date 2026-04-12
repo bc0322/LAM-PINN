@@ -1,7 +1,7 @@
 seed: 42
 preferred_cuda_index: 1
-run_name: solid_3cluster_adam_from_lbfgs
-train_csv_path: data/train/Solid_cluster_results__3cluster_100epoch_240708.csv
+run_name: solid_3cluster_adam
+train_csv_path: data/train/task_metadata.csv
 output_root: outputs/train
 expected_num_clusters: 3
 reference_row_index: 13
