@@ -52,10 +52,12 @@ def _train_single_task_stage(
 
     gate_params = [gate for index, gate in enumerate(model.gates) if index != active_idx]
 
+    forward_gate_lr = 5e-3
+
     optimizer = torch.optim.Adam(
         [
             {"params": trainable_params, "lr": config.optimization.lr_model},
-            {"params": gate_params, "lr": config.optimization.forward_gate_lr},
+            {"params": gate_params, "lr": forward_gate_lr},
         ]
     )
     scheduler = ReduceLROnPlateau(
