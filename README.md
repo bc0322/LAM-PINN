@@ -1,5 +1,6 @@
 # LAM-PINN
 
+> [!WARNING]
 > **Notice (Apr 12, 2026):** A reproducibility issue was identified and corrected. Please use the updated code and instructions in this repository.
 
 This repository is a cleaned public release of the **core LAM-PINN pipeline** used in the manuscript.  
