@@ -34,8 +34,6 @@ class TrainOptimizationConfig:
     forward_stage_epochs: int = 200
     backward_stage_epochs: int = 100
     lr_model: float = 0.002
-    forward_gate_lr: float = 5e-3
-    backward_lr: float = 5e-5
     bc_scale: float = 50.0
     scheduler_factor: float = 0.7
     scheduler_patience: int = 150
