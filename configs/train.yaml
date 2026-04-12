@@ -5,7 +5,7 @@ train_csv_path: data/train/task_metadata.csv
 output_root: outputs/train
 expected_num_clusters: 3
 reference_row_index: 13
-warm_start_checkpoint_path: pretrained/model_state_dict.pth
+warm_start_checkpoint_path: lam_pinn/pretrained/model_state_dict.pth
 
 model:
   hidden_dim: 64
