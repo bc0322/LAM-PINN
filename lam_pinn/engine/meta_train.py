@@ -52,12 +52,10 @@ def _train_single_task_stage(
 
     gate_params = [gate for index, gate in enumerate(model.gates) if index != active_idx]
 
-    forward_gate_lr = 5e-3
-
     optimizer = torch.optim.Adam(
         [
             {"params": trainable_params, "lr": config.optimization.lr_model},
-            {"params": gate_params, "lr": forward_gate_lr},
+            {"params": gate_params, "lr": 5e-3},
         ]
     )
     scheduler = ReduceLROnPlateau(
@@ -110,8 +108,7 @@ def _train_backward_stage(
     logger,
 ) -> float:
     domain_points, bc1_y0, bc2_x0, bc3_yb, bc4_xa = training_tensors
-
-    optimizer = torch.optim.Adam(list(model.backward.parameters()), lr=config.optimization.backward_lr)
+    optimizer = torch.optim.Adam(list(model.backward.parameters()), lr=5e-5)
     scheduler = ReduceLROnPlateau(
         optimizer,
         mode="min",
