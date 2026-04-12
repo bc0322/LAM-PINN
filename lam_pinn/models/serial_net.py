@@ -87,13 +87,12 @@ class SerialNetwork(nn.Module):
         return self.backward(combined)
 
     def set_gate_pattern(self, active_idx: int | None = None, active_value: float = 1.0, inactive_value: float = 0.1) -> None:
-        with torch.no_grad():
-            if active_idx is None:
-                for gate in self.gates:
-                    gate.fill_(inactive_value)
-            else:
-                for index, gate in enumerate(self.gates):
-                    gate.fill_(active_value if index == active_idx else inactive_value)
+        if active_idx is None:
+            for gate in self.gates:
+                gate.data.fill_(inactive_value)
+        else:
+            for index, gate in enumerate(self.gates):
+                gate.data.fill_(active_value if index == active_idx else inactive_value)
 
     def reset_gates(self, value: float = 0.5) -> None:
         with torch.no_grad():
