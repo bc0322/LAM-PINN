@@ -17,15 +17,22 @@ def _legacy_state_dict_to_current(state_dict: dict) -> dict:
     mapped = {}
     for key, value in state_dict.items():
         new_key = key
-        new_key = new_key.replace("forward1.", "forward_nets.0.")
-        new_key = new_key.replace("forward2.", "forward_nets.1.")
-        new_key = new_key.replace("forward3.", "forward_nets.2.")
-        if new_key == "n0":
+        if new_key.startswith("forward1."):
+            new_key = new_key.replace("forward1.", "forward_nets.0.")
+        elif new_key.startswith("forward2."):
+            new_key = new_key.replace("forward2.", "forward_nets.1.")
+        elif new_key.startswith("forward3."):
+            new_key = new_key.replace("forward3.", "forward_nets.2.")
+        elif new_key == "n0":
             new_key = "gates.0"
         elif new_key == "n1":
             new_key = "gates.1"
         elif new_key == "n2":
             new_key = "gates.2"
+
+        if new_key.startswith("gates.") and getattr(value, "ndim", None) == 0:
+            value = value.view(1)
+
         mapped[new_key] = value
     return mapped
 
