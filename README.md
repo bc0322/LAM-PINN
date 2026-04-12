@@ -1,5 +1,7 @@
 # LAM-PINN
 
+> **Notice (Apr 12, 2026):** A reproducibility issue was identified and corrected. Please use the updated code and instructions in this repository.
+
 This repository is a cleaned public release of the **core LAM-PINN pipeline** used in the manuscript.  
 It is intentionally organized as a compact, reproducible reference implementation rather than a dump of research notebooks.
 
@@ -34,6 +36,7 @@ lam-pinn-public/
 │   ├── evaluation/
 │   ├── models/
 │   ├── physics/
+│   ├── pretrained/
 │   └── utils/
 ├── scripts/
 │   ├── run_train.py
@@ -72,14 +75,15 @@ Place the training CSV in `data/train/` and point `configs/train.yaml` to it.
 
 Required columns:
 
-- `E_raw`
-- `f_raw`
-- `k_raw`
+- one of: `E` or `E_raw`
+- one of: `f` or `f_raw`
+- one of: `k` or `k_raw`
 - `Initial_L1`
 - `Final_L2`
 - `Avg_L3`
 - `Cluster`
 
+The loader accepts either the legacy names (`E_raw`, `f_raw`, `k_raw`) or the compact names (`E`, `f`, `k`) and canonicalizes them internally.
 Additional columns are allowed and ignored by the core pipeline.
 
 ### 2) Evaluation CSVs for numbered adaptation cases
