@@ -126,7 +126,7 @@ Edit:
 Then run:
 
 ```bash
-python scripts/run_train.py --config configs/train.yaml
+PYTHONPATH=. python scripts/run_train.py --config configs/train.yaml
 ```
 
 ### Step 2. Configure single-task adaptation by case index
@@ -136,8 +136,8 @@ Set `task.case_index` in `configs/adapt.yaml`, or override it from the command l
 Examples:
 
 ```bash
-python scripts/run_adapt.py --config configs/adapt.yaml
-python scripts/run_adapt.py --config configs/adapt.yaml --case-index 3
+PYTHONPATH=. python scripts/run_adapt.py --config configs/adapt.yaml
+PYTHONPATH=. python scripts/run_adapt.py --config configs/adapt.yaml --case-index 3
 ```
 
 ---
