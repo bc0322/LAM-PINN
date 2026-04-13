@@ -23,3 +23,7 @@ def set_global_seed(seed: int) -> None:
         torch.use_deterministic_algorithms(True)
     except Exception:
         pass
+
+
+def set_seed(seed: int) -> None:
+    set_global_seed(seed)
