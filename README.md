@@ -1,7 +1,10 @@
 # LAM-PINN
 
-> [!WARNING]
-> **Notice (Apr 12, 2026):** A reproducibility issue was identified and corrected. Please use the updated code and instructions in this repository.
+> [!CAUTION]
+> A reproducibility issue was identified and corrected.
+
+## 🚨 **Notice (Apr 13, 2026)**
+**Please use the updated code and instructions in this repository.**
 
 This repository is a cleaned public release of the **core LAM-PINN pipeline** used in the manuscript.  
 It is intentionally organized as a compact, reproducible reference implementation rather than a dump of research notebooks.
