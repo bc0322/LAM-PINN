@@ -1,5 +1,5 @@
-seed: 20
-preferred_cuda_index: 1
+seed: 42
+preferred_cuda_index: 0
 run_name: lam_pinn_adapt_single_case
 checkpoint_path: outputs/train/solid_3cluster_adam/checkpoints
 output_root: outputs/adapt
@@ -20,7 +20,7 @@ task:
 
 optimization:
   epochs: 1000
-  lr_model: 0.003
+  lr_model: 0.002
   lr_gate: 0.3
   bc_scale: 50.0
   scheduler_factor: 0.7
