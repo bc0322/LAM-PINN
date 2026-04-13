@@ -1,5 +1,5 @@
 seed: 42
-preferred_cuda_index: 1
+preferred_cuda_index: 0
 run_name: solid_3cluster_adam
 train_csv_path: data/train/task_metadata.csv
 output_root: outputs/train
@@ -17,7 +17,7 @@ sampling:
   num_bc_points: 500
 
 optimization:
-  forward_stage_epochs: 100
+  forward_stage_epochs: 200
   backward_stage_epochs: 100
   lr_model: 0.002
   bc_scale: 50.0
